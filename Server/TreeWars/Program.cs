@@ -28,7 +28,7 @@ namespace TreeWars
 
           
         }
-
+        static Message msg = new Message();
         static void AcceptCallback(IAsyncResult ar)
         {
             Socket serverSocket = ar.AsyncState as Socket;
@@ -38,7 +38,7 @@ namespace TreeWars
             byte[] data = System.Text.Encoding.UTF8.GetBytes(message);
             clientSocket.Send(data);
 
-            clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+            clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize, SocketFlags.None, ReceiveCallBack, clientSocket);
 
             serverSocket.BeginAccept(AcceptCallback, serverSocket);
         }
@@ -51,17 +51,21 @@ namespace TreeWars
             {
                 clientSocket = ar.AsyncState as Socket;
                 int count = clientSocket.EndReceive(ar);
-
+                
                 if (count == 0)
                 {
                     clientSocket.Close();
                     return;
                 }
+                
+                msg.AddCount(count);
+                msg.ReadMessage();
 
-                string s = Encoding.UTF8.GetString(dataBuffer, 0, count);
-                Console.WriteLine("接收到客户端消息：" + s);
+                //string s = Encoding.UTF8.GetString(dataBuffer, 0, count);
+                //Console.WriteLine("接收到客户端消息：" + s);
 
-                clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+                //clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+                clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize, SocketFlags.None, ReceiveCallBack, clientSocket);
             }
             catch (Exception e)
             {

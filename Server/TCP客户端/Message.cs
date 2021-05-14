@@ -14,7 +14,7 @@ namespace TCP客户端
             int count = content.Length;
             byte[] length = BitConverter.GetBytes(count);
             byte[] newByte = length.Concat(content).ToArray();
-            return content;
+            return newByte;
         }
 
     }
