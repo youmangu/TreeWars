@@ -12,12 +12,47 @@ namespace TreeWars
     {
         static void Main(string[] args)
         {
-            Socket serverSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
+            StartServerASync();
+            Console.ReadKey();
+        }
+
+        static void StartServerASync()
+        {
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ipAddress = IPAddress.Parse("192.168.1.85");
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 88);
             serverSocket.Bind(ipEndPoint);// 绑定ip和端口
             serverSocket.Listen(0); // 开始监听， 数字代表队列里可以监听的链接数，0 代表无限制
-            Socket clientSocket =  serverSocket.Accept(); // 接受一个客户端连接
+            Socket clientSocket = serverSocket.Accept(); // 接受一个客户端连接
+
+            // 向客户的发送消息
+            string message = "Hello client! 你好...";
+            byte[] data = System.Text.Encoding.UTF8.GetBytes(message);
+            clientSocket.Send(data);
+
+            clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+        }
+
+        static byte[] dataBuffer = new byte[1024];
+        static void ReceiveCallBack(IAsyncResult ar)
+        {
+            Socket clientSocket = ar.AsyncState as Socket;
+            int count = clientSocket.EndReceive(ar);
+            string s = Encoding.UTF8.GetString(dataBuffer, 0, count);
+            Console.WriteLine(s);
+
+            clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+
+        }
+
+        void StartServerSync()
+        {
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ipAddress = IPAddress.Parse("192.168.1.85");
+            IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 88);
+            serverSocket.Bind(ipEndPoint);// 绑定ip和端口
+            serverSocket.Listen(0); // 开始监听， 数字代表队列里可以监听的链接数，0 代表无限制
+            Socket clientSocket = serverSocket.Accept(); // 接受一个客户端连接
 
             // 向客户的发送消息
             string message = "Hello client! 你好...";
@@ -26,7 +61,7 @@ namespace TreeWars
 
             // 接受客户端的消息
             byte[] buffer = new byte[1024];
-            int count =  clientSocket.Receive(buffer);
+            int count = clientSocket.Receive(buffer);
             string msgReceive = System.Text.Encoding.UTF8.GetString(buffer, 0, count);
             Console.WriteLine(msgReceive);
 
