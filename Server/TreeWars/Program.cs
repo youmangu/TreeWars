@@ -46,12 +46,33 @@ namespace TreeWars
         static byte[] dataBuffer = new byte[1024];
         static void ReceiveCallBack(IAsyncResult ar)
         {
-            Socket clientSocket = ar.AsyncState as Socket;
-            int count = clientSocket.EndReceive(ar);
-            string s = Encoding.UTF8.GetString(dataBuffer, 0, count);
-            Console.WriteLine(s);
+            Socket clientSocket = null;
+            try
+            {
+                clientSocket = ar.AsyncState as Socket;
+                int count = clientSocket.EndReceive(ar);
 
-            clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+                if (count == 0)
+                {
+                    clientSocket.Close();
+                    return;
+                }
+
+                string s = Encoding.UTF8.GetString(dataBuffer, 0, count);
+                Console.WriteLine(s);
+
+                clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                if (clientSocket != null)
+                {
+                    clientSocket.Close();
+                }
+            }
+            
+            
 
         }
 
