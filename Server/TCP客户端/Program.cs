@@ -20,10 +20,15 @@ namespace TCP客户端
             string s = Encoding.UTF8.GetString(buffer, 0, count);
             Console.WriteLine(s);
 
-            while (true)
+            //while (true)
+            //{
+            //    string data = Console.ReadLine();
+            //    clientSocket.Send(Encoding.UTF8.GetBytes(data));
+            //}
+
+            for (int i = 0; i < 100; i++)
             {
-                string data = Console.ReadLine();
-                clientSocket.Send(Encoding.UTF8.GetBytes(data));
+                clientSocket.Send(Message.GetBytes(i.ToString()));
             }
             
 

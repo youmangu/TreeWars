@@ -59,7 +59,7 @@ namespace TreeWars
                 }
 
                 string s = Encoding.UTF8.GetString(dataBuffer, 0, count);
-                Console.WriteLine(s);
+                Console.WriteLine("接收到客户端消息：" + s);
 
                 clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
             }
