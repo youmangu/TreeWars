@@ -23,14 +23,24 @@ namespace TreeWars
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 88);
             serverSocket.Bind(ipEndPoint);// 绑定ip和端口
             serverSocket.Listen(0); // 开始监听， 数字代表队列里可以监听的链接数，0 代表无限制
-            Socket clientSocket = serverSocket.Accept(); // 接受一个客户端连接
+            //Socket clientSocket = serverSocket.Accept(); // 接受一个客户端连接
+            serverSocket.BeginAccept(AcceptCallback, serverSocket);
 
+          
+        }
+
+        static void AcceptCallback(IAsyncResult ar)
+        {
+            Socket serverSocket = ar.AsyncState as Socket;
+            Socket clientSocket = serverSocket.EndAccept(ar);
             // 向客户的发送消息
             string message = "Hello client! 你好...";
             byte[] data = System.Text.Encoding.UTF8.GetBytes(message);
             clientSocket.Send(data);
 
             clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
+
+            serverSocket.BeginAccept(AcceptCallback, serverSocket);
         }
 
         static byte[] dataBuffer = new byte[1024];
