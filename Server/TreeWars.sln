@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeWars", "TreeWars\TreeWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP客户端", "TCP客户端\TCP客户端.csproj", "{E6A75F7B-338C-4EAD-9DD8-2A5C61484FF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{D7331618-1974-4D98-9020-838072569ED7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E6A75F7B-338C-4EAD-9DD8-2A5C61484FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6A75F7B-338C-4EAD-9DD8-2A5C61484FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6A75F7B-338C-4EAD-9DD8-2A5C61484FF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7331618-1974-4D98-9020-838072569ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7331618-1974-4D98-9020-838072569ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7331618-1974-4D98-9020-838072569ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7331618-1974-4D98-9020-838072569ED7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
