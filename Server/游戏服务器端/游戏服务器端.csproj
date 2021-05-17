@@ -46,18 +46,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Controller\ControllerManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Client.cs" />
+    <Compile Include="Server\Message.cs" />
+    <Compile Include="Server\Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controller\" />
     <Folder Include="DAO\" />
     <Folder Include="Model\" />
-    <Folder Include="Server\" />
     <Folder Include="Tool\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{dcf4bfb0-44fa-46e3-b057-0cbd99545b23}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
