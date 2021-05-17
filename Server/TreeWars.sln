@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP客户端", "TCP客户�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{D7331618-1974-4D98-9020-838072569ED7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游戏服务器端", "游戏服务器端\游戏服务器端.csproj", "{D653FEFE-CB35-4F16-BB65-89922895C2E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DCF4BFB0-44FA-46E3-B057-0CBD99545B23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{D7331618-1974-4D98-9020-838072569ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7331618-1974-4D98-9020-838072569ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7331618-1974-4D98-9020-838072569ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D653FEFE-CB35-4F16-BB65-89922895C2E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D653FEFE-CB35-4F16-BB65-89922895C2E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D653FEFE-CB35-4F16-BB65-89922895C2E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D653FEFE-CB35-4F16-BB65-89922895C2E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF4BFB0-44FA-46E3-B057-0CBD99545B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF4BFB0-44FA-46E3-B057-0CBD99545B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF4BFB0-44FA-46E3-B057-0CBD99545B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF4BFB0-44FA-46E3-B057-0CBD99545B23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
