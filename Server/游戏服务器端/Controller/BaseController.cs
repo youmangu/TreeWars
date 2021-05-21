@@ -4,12 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using GameServer.Servers;
+
 namespace GameServer.Controller
 {
     abstract class BaseController
     {
         RequestCode requestCode = RequestCode.None;
 
-        public virtual void DefaultHandle() { }
+        public RequestCode RequestCode {
+            get {
+                return requestCode;
+            }
+        }
+
+        public virtual string DefaultHandle(string data, Client client, Server server)
+        {
+            return null;
+        }
     }
 }
