@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Net.Sockets;
 using System;
+using Common;
+
 
 /// <summary>
 /// 用来管理跟服务器端的链接
@@ -27,6 +29,12 @@ public class ClientManager : BaseManager
         {
             Debug.Log("无法与服务器建立链接：" + e.Message);
         }
+    }
+
+    public void SendRequest(RequestCode requestCode, ActionCode actionCode, String data)
+    {
+        byte[] bytes = Message.PackData(requestCode, actionCode, data);
+        clientSocket.Send(bytes);
     }
 
     public override void OnDestroy()
