@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerManger : BaseManager
 {
-
+    public PlayerManger(GameFacade facade) : base(facade) { }
 }

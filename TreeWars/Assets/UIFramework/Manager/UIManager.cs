@@ -5,7 +5,9 @@ using System;
 
 public class UIManager : BaseManager
 {
-
+    public UIManager(GameFacade facade) : base(facade) {
+        ParseUIPanelTypeJson();
+    }
     /// 
     /// 单例模式的核心
     /// 1，定义一个静态的对象 在外界访问 在内部构造
@@ -40,11 +42,6 @@ public class UIManager : BaseManager
     private Dictionary<UIPanelType, string> panelPathDict;//存储所有面板Prefab的路径
     private Dictionary<UIPanelType, BasePanel> panelDict;//保存所有实例化面板的游戏物体身上的BasePanel组件
     private Stack<BasePanel> panelStack;
-
-    public UIManager()
-    {
-        ParseUIPanelTypeJson();
-    }
 
     /// <summary>
     /// 把某个页面入栈，  把某个页面显示在界面上

@@ -28,7 +28,7 @@ class Message
     /// <summary>
     /// 解析数据
     /// </summary>
-    public void ReadMessage(int newDataAmount, Action<RequestCode, ActionCode, string> processCodeCallBack)
+    public void ReadMessage(int newDataAmount, Action<RequestCode, string> processCodeCallBack)
     {
         startIndex += newDataAmount;
         while (true)
@@ -38,9 +38,8 @@ class Message
             if ((startIndex - 4) >= count)
             {
                 RequestCode requestCode = (RequestCode)BitConverter.ToInt32(data, 4);
-                ActionCode actionCode = (ActionCode)BitConverter.ToInt32(data, 8);
-                string s = Encoding.UTF8.GetString(data, 12, count - 8);
-                processCodeCallBack(requestCode, actionCode, s);
+                string s = Encoding.UTF8.GetString(data, 8, count - 4);
+                processCodeCallBack(requestCode, s);
                 Array.Copy(data, count + 4, data, 0, startIndex - 4 - count);
                 startIndex -= (count + 4);
             }

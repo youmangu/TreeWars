@@ -15,6 +15,9 @@ public class ClientManager : BaseManager
     private const int PORT = 6688;
 
     private Socket clientSocket;
+    private Message msg = new Message();
+
+    public ClientManager(GameFacade facade) : base(facade) { }
 
     public override void OnInit()
     {
@@ -24,11 +27,35 @@ public class ClientManager : BaseManager
         try
         {
             clientSocket.Connect(IP, PORT);
+            Start();
         }
         catch (Exception e)
         {
             Debug.Log("无法与服务器建立链接：" + e.Message);
         }
+    }
+
+    private void Start()
+    {
+        clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize, SocketFlags.None, ReceiveMessage, null);
+    }
+
+    private void ReceiveMessage(IAsyncResult ar)
+    {
+        try
+        {
+            int count = clientSocket.EndReceive(ar);
+            msg.ReadMessage(count, OnProcessData);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    private void OnProcessData(RequestCode requestCode, string data)
+    {
+
     }
 
     public void SendRequest(RequestCode requestCode, ActionCode actionCode, String data)
