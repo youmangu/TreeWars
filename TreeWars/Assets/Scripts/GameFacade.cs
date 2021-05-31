@@ -69,4 +69,9 @@ public class GameFacade : MonoBehaviour
         requestMng.RemoveRequest(requestCode);
     }
 
+    public void HandleResponse(RequestCode requestCode, string data)
+    {
+        requestMng.HandleResponse(requestCode, data);
+    }
+
 }

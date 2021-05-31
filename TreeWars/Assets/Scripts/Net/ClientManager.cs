@@ -46,6 +46,7 @@ public class ClientManager : BaseManager
         {
             int count = clientSocket.EndReceive(ar);
             msg.ReadMessage(count, OnProcessData);
+            Start();
         }
         catch (Exception e)
         {
